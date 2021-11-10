@@ -6,9 +6,9 @@ import java.sql.DriverManager;
 
 public class TestDbUtil {
     public static void main(String[] args) {
-        String jdbcUrl= "jdbc:mysql://localhost:3306/web_customer_tracker?useSSL=false";
-        String user = "springstudent";
-        String pass = "springstudent";
+        String jdbcUrl= "jdbc:mysql://localhost:3306/soccer-team-organizer?useSSL=false";
+        String user = "socceradmin";
+        String pass = "socceradmin";
 
 //        String driver = "com.mysql.jdbc.Driver";
 
