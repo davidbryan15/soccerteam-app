@@ -1,4 +1,4 @@
-package com.soccer.soccerteamapp.Entity;
+package com.soccer.soccerteamapp.entity;
 
 import javax.persistence.*;
 
