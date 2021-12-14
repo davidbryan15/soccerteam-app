@@ -1,7 +1,6 @@
-package com.soccer.soccerteamapp.entity;
+package com.soccer.soccerteamapp.Entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity

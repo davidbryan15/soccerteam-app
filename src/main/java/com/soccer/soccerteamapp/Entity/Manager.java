@@ -1,10 +1,10 @@
-package com.soccer.soccerteamapp.entity;
+package com.soccer.soccerteamapp.Entity;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "Manager")
+@Table(name = "manager")
 public class Manager {
 
 

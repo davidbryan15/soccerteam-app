@@ -1,4 +1,4 @@
-package com.soccer.soccerteamapp.controller;
+package com.soccer.soccerteamapp.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
