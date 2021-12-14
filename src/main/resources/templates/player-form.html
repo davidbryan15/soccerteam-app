@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Player</title>
+</head>
+<body>
+<h2>Add New Player</h2>
+
+<form action="addPlayer" method="POST">
+    <label>First Name:</label>
+    <input type="text" name="firstName"/><br><br>
+    <label>Last Name:</label>
+    <input type="text" name="lastName"/><br><br>
+    <label>Email</label>
+    <input type="text" name="email"/><br><br>
+    <label>Postion:</label>
+    <select>
+        <option value="forward">Forward</option>
+        <option value="midfielder">Midfielder</option>
+        <option value="fullback">Fullback</option>
+    </select>
+    <br><br>
+    <input type="submit" value="Add"/>
+</form>
+
+</body>
+</html>
