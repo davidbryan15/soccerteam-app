@@ -38,10 +38,11 @@ public class Player {
     @Column(name="PLYR_POSITION")
     private String playerPosition;
 
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
-                         CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "TEAM_ID")
-    private Team team;
+//The following code is causing infinite recusion b/w team and player when testing through Rest API. Causing app to rewrite the Json Object over and over
+//    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
+//                         CascadeType.PERSIST, CascadeType.REFRESH})
+//    @JoinColumn(name = "TEAM_ID")
+//    private Team team;
 
     public Player() {
 
@@ -139,14 +140,14 @@ public class Player {
     public void setPlayerPosition(String playerPosition) {
         this.playerPosition = playerPosition;
     }
-
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
-    }
+//
+//    public Team getTeam() {
+//        return team;
+//    }
+//
+//    public void setTeam(Team team) {
+//        this.team = team;
+//    }
 
 
     @Override
@@ -162,7 +163,7 @@ public class Player {
                 ", playerZip=" + playerZip +
                 ", playerPhone=" + playerPhone +
                 ", playerPosition='" + playerPosition + '\'' +
-                ", team=" + team +
+//                ", team=" + team +
                 '}';
     }
 

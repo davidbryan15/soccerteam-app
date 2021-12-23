@@ -15,10 +15,11 @@ public class Team {
     @Column(name = "TEAM_NAME")
     private String teamName;
 
-    @OneToMany(mappedBy = "team",
-               cascade = {CascadeType.DETACH, CascadeType.MERGE,
-                          CascadeType.PERSIST, CascadeType.REFRESH})
-    private List<Player> players;
+//The following code is causing infinite recusion b/w team and player when testing through Rest API. Causing app to rewrite the Json Object over and over
+//    @OneToMany(mappedBy = "team",
+//               cascade = {CascadeType.DETACH, CascadeType.MERGE,
+//                          CascadeType.PERSIST, CascadeType.REFRESH})
+//    private List<Player> players;
 
     @ManyToMany
     @JoinTable(
@@ -52,13 +53,15 @@ public class Team {
         this.teamName = teamName;
     }
 
-    public List<Player> getPlayers() {
-        return players;
-    }
-
-    public void setPlayers(List<Player> players) {
-        this.players = players;
-    }
+//causing infinite recusion when testing through Rest API. Causing app to rewrite the Json Object over and over
+//
+//    public List<Player> getPlayers() {
+//        return players;
+//    }
+//
+//    public void setPlayers(List<Player> players) {
+//        this.players = players;
+//    }
 
     @Override
     public String toString() {
