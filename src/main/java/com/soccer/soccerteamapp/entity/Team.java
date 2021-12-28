@@ -1,6 +1,18 @@
 package com.soccer.soccerteamapp.entity;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.List;
 
 @Entity
@@ -15,11 +27,12 @@ public class Team {
     @Column(name = "TEAM_NAME")
     private String teamName;
 
-//The following code is causing infinite recusion b/w team and player when testing through Rest API. Causing app to rewrite the Json Object over and over
-//    @OneToMany(mappedBy = "team",
-//               cascade = {CascadeType.DETACH, CascadeType.MERGE,
-//                          CascadeType.PERSIST, CascadeType.REFRESH})
-//    private List<Player> players;
+    //    This item is causing infinite recursion - still need testing - added @JsonBManagedReference for intermittent workaround
+    @OneToMany(mappedBy = "team",
+               cascade = {CascadeType.DETACH, CascadeType.MERGE,
+                          CascadeType.PERSIST, CascadeType.REFRESH})
+    @JsonManagedReference
+    private List<Player> players;
 
     @ManyToMany
     @JoinTable(
@@ -54,14 +67,14 @@ public class Team {
     }
 
 //causing infinite recusion when testing through Rest API. Causing app to rewrite the Json Object over and over
-//
-//    public List<Player> getPlayers() {
-//        return players;
-//    }
-//
-//    public void setPlayers(List<Player> players) {
-//        this.players = players;
-//    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
 
     @Override
     public String toString() {

@@ -1,6 +1,16 @@
 package com.soccer.soccerteamapp.entity;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name="player")
@@ -38,11 +48,13 @@ public class Player {
     @Column(name="PLYR_POSITION")
     private String playerPosition;
 
-//The following code is causing infinite recusion b/w team and player when testing through Rest API. Causing app to rewrite the Json Object over and over
-//    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
-//                         CascadeType.PERSIST, CascadeType.REFRESH})
-//    @JoinColumn(name = "TEAM_ID")
-//    private Team team;
+//    This item is causing infinite recursion - still need testing - added @JsonBackReference for intermittent workaround
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
+                         CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "TEAM_ID")
+    @JsonBackReference
+    private Team team;
+
 
     public Player() {
 
@@ -140,14 +152,14 @@ public class Player {
     public void setPlayerPosition(String playerPosition) {
         this.playerPosition = playerPosition;
     }
-//
-//    public Team getTeam() {
-//        return team;
-//    }
-//
-//    public void setTeam(Team team) {
-//        this.team = team;
-//    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
 
 
     @Override
@@ -163,7 +175,7 @@ public class Player {
                 ", playerZip=" + playerZip +
                 ", playerPhone=" + playerPhone +
                 ", playerPosition='" + playerPosition + '\'' +
-//                ", team=" + team +
+                ", team=" + team +
                 '}';
     }
 
