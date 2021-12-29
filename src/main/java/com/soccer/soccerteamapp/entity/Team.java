@@ -2,7 +2,15 @@ package com.soccer.soccerteamapp.entity;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "team")
 public class Team {
@@ -15,10 +23,8 @@ public class Team {
     @Column(name = "TEAM_NAME")
     private String teamName;
 
-    @OneToMany(mappedBy = "team",
-               cascade = {CascadeType.DETACH, CascadeType.MERGE,
-                          CascadeType.PERSIST, CascadeType.REFRESH})
-    private List<Player> players;
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Player> players;
 
     @ManyToMany
     @JoinTable(
@@ -27,38 +33,6 @@ public class Team {
             inverseJoinColumns = @JoinColumn(name = "mgr_id")
     )
     private List<Manager> managers;
-
-    public Team() {
-
-    }
-
-    public Team(String teamName) {
-        this.teamName = teamName;
-    }
-
-    public int getTeamId() {
-        return teamId;
-    }
-
-    public void setTeamId(int teamId) {
-        this.teamId = teamId;
-    }
-
-    public String getTeamName() {
-        return teamName;
-    }
-
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
-    }
-
-    public List<Player> getPlayers() {
-        return players;
-    }
-
-    public void setPlayers(List<Player> players) {
-        this.players = players;
-    }
 
     @Override
     public String toString() {
